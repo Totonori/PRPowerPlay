@@ -1,9 +1,11 @@
+package org.firstinspires.ftc.teamcode.TeleOp;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name="PRTeleOp")
+@TeleOp(name="org.firstinspires.ftc.teamcode.TeleOp.PRTeleOp")
 public class PRTeleOp extends LinearOpMode {
     public DcMotor leftDrive;
     public DcMotor rightDrive;
