@@ -30,6 +30,10 @@ public class PRAuto extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        strafeToPosition(30, Drive_Speed);
+        encoderDrive(Drive_Speed, -3, 3, 1);
+        encoderDrive(Drive_Speed, 3, -3, 1);
+        encoderDrive(Drive_Speed, -10, -10, 1);
 
     }
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
@@ -116,6 +120,7 @@ public class PRAuto extends LinearOpMode {
         PRobot.fR.setPower(0);
         PRobot.bR.setPower(0);
         return;
+
     }
 }
 
