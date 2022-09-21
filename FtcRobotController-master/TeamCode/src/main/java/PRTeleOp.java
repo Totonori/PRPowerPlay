@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class PRTeleOp extends LinearOpMode {
     public DcMotor leftDrive;
     public DcMotor rightDrive;
-    public DcMotor  leftArm;
+    public DcMotor  lift;
     public Servo leftClaw;
     public Servo rightClaw;
 
@@ -17,17 +17,12 @@ public class PRTeleOp extends LinearOpMode {
         double right;
         double drive;
         double turn;
-        double clawopen;
-        double clawclose;
-        double clawup;
-        double clawdown;
+        boolean liftup;
+        boolean liftdown;
 
         leftDrive  = hardwareMap.get(DcMotor.class, "leftDrive");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
-        leftArm    = hardwareMap.get(DcMotor.class, "left_arm");
-
-        leftClaw  = hardwareMap.get(Servo.class, "left_hand");
-        rightClaw = hardwareMap.get(Servo.class, "right_hand");
+        lift    = hardwareMap.get(DcMotor.class, "lift");
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -37,6 +32,9 @@ public class PRTeleOp extends LinearOpMode {
 
         left  = drive + turn;
         right = drive - turn;
+
+        liftup = gamepad2.dpad_up;
+        liftdown = gamepad2.dpad_down;
     }
 
 
