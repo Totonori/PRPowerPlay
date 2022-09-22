@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class PRTeleOp extends LinearOpMode {
     public DcMotor leftDrive;
     public DcMotor rightDrive;
-    public DcMotor  lift;
-    public Servo leftClaw;
-    public Servo rightClaw;
+    //public DcMotor  lift;
+    //public Servo leftClaw;
+    //public Servo rightClaw;
 
     @Override
     public void runOpMode() {
@@ -24,7 +24,7 @@ public class PRTeleOp extends LinearOpMode {
 
         leftDrive  = hardwareMap.get(DcMotor.class, "leftDrive");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
-        lift    = hardwareMap.get(DcMotor.class, "lift");
+       // lift    = hardwareMap.get(DcMotor.class, "lift");
 
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
