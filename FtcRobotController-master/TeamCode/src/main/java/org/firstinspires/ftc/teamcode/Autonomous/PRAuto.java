@@ -32,8 +32,12 @@ public class PRAuto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         PRobot.init(hardwareMap);
 
-        strafeToPosition(30, Drive_Speed);
-        
+        strafeToPosition(-20, Drive_Speed);
+        sleep(100);
+        encoderDrive(Drive_Speed, -5, 5, 2);
+        sleep(100);
+        encoderDrive(Drive_Speed, 5, -5, 2);
+        sleep(100);
 
     }
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
@@ -100,8 +104,8 @@ public class PRAuto extends LinearOpMode {
 
         PRobot.fL.setTargetPosition(PRobot.fL.getCurrentPosition() + move);
         PRobot.bL.setTargetPosition(PRobot.bL.getCurrentPosition() - move);
-        PRobot.fR.setTargetPosition(PRobot.fR.getCurrentPosition() - move);
-        PRobot.bR.setTargetPosition(PRobot.bR.getCurrentPosition() + move);
+        PRobot.fR.setTargetPosition(PRobot.fR.getCurrentPosition() + move);
+        PRobot.bR.setTargetPosition(PRobot.bR.getCurrentPosition() - move);
 
         PRobot.fL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         PRobot.bL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
