@@ -42,7 +42,7 @@ public class Robot {
     public void drive(double power){
         drive(power,power,power,power);
     }
-    private void drive(double frL, double frR, double brL, double brR) {
+    public void drive(double frL, double frR, double brL, double brR) {
         fL.setPower(dtSpeed*frL);
         fR.setPower(dtSpeed*frR);
         bL.setPower(dtSpeed*brL);

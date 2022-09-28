@@ -1,43 +1,54 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.Hardware.Robot;
+
 @TeleOp(name="org.firstinspires.ftc.teamcode.TeleOp.PRTeleOp")
-public class PRTeleOp extends LinearOpMode {
-    public DcMotor leftDrive;
-    public DcMotor rightDrive;
-    //public DcMotor  lift;
-    //public Servo leftClaw;
-    //public Servo rightClaw;
+public class PRTeleOp extends OpMode {
+
+    Robot PRobot = new Robot();
 
     @Override
-    public void runOpMode() {
-        double left;
-        double right;
-        double drive;
-        double turn;
-        boolean liftup;
-        boolean liftdown;
-
-        leftDrive  = hardwareMap.get(DcMotor.class, "leftDrive");
-        rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
-       // lift    = hardwareMap.get(DcMotor.class, "lift");
-
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
-
-        drive = gamepad1.left_stick_y;
-        turn  =  gamepad1.right_stick_x;
-
-        left  = drive + turn;
-        right = drive - turn;
-
-        liftup = gamepad2.dpad_up;
-        liftdown = gamepad2.dpad_down;
+    public void init() {
+        PRobot.init(hardwareMap);
     }
 
+    @Override
+    public void loop() {
+        if (Math.abs(-gamepad1.left_stick_y) > .1) {
+            PRobot.drive(-gamepad1.left_stick_y);
+            telemetry.addData("Moving U/D",-gamepad1.left_stick_y);
+            telemetry.update();
 
+        }
+        else if (gamepad1.right_stick_x < 0 || gamepad1.right_stick_x > 0){
+            PRobot.drive(-gamepad1.right_stick_x,gamepad1.right_stick_x,-gamepad1.right_stick_x,gamepad1.right_stick_x);
+            telemetry.addData("Turning L/R", gamepad1.right_stick_x);
+            telemetry.update();
+        }
+        else if (gamepad1.left_bumper){
+            PRobot.fL.setPower(1);
+            PRobot.bL.setPower(-1);
+            PRobot.fR.setPower(-1);
+            PRobot.bR.setPower(1);
+            telemetry.addData("Strafe Left",gamepad1.left_bumper);
+            telemetry.update();
+        }
+        else if (gamepad1.right_bumper){
+            PRobot.fL.setPower(-1);
+            PRobot.bL.setPower(1);
+            PRobot.fR.setPower(1);
+            PRobot.bR.setPower(-1);
+            telemetry.addData("Strafe Right",gamepad1.right_bumper);
+            telemetry.update();
+        }
+    }
 }
+
+
