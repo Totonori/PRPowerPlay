@@ -32,10 +32,12 @@ public class PRAuto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         PRobot.init(hardwareMap);
 
-        strafeToPosition(-20, Drive_Speed);
+        strafeToPosition(-20, Drive_Speed, 2);
         sleep(100);
+
         encoderDrive(Drive_Speed, -5, 5, 2);
         sleep(100);
+
         encoderDrive(Drive_Speed, 5, -5, 2);
         sleep(100);
 
@@ -98,7 +100,7 @@ public class PRAuto extends LinearOpMode {
             sleep(250);
         }
     }
-    public void strafeToPosition(double inches, double speed) {
+    public void strafeToPosition(double inches, double speed, double timeoutS) {
 
         int move = (int) (Math.round(inches * cpi * meccyBias * 1.265));
 
@@ -116,6 +118,15 @@ public class PRAuto extends LinearOpMode {
         PRobot.bL.setPower(speed);
         PRobot.fR.setPower(speed);
         PRobot.bR.setPower(speed);
+
+        while (opModeIsActive() &&
+                (runtime.seconds() < timeoutS) &&
+                (PRobot.fL.isBusy() && PRobot.bL.isBusy() && PRobot.fR.isBusy() && PRobot.bR.isBusy())) {
+
+            telemetry.addData("Running to", "%7d :%7d",
+                    PRobot.fL.getCurrentPosition(), PRobot.bL.getCurrentPosition(), PRobot.fR.getCurrentPosition(), PRobot.bR.getCurrentPosition());
+            telemetry.update();
+        }
 
         while (PRobot.fL.isBusy() && PRobot.bL.isBusy() && PRobot.fR.isBusy() && PRobot.bR.isBusy()) {
         }
