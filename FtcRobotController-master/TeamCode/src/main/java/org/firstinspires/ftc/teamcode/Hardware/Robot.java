@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -13,8 +14,8 @@ public class Robot {
     public double dtSpeed = 1;
 
     //Intake
-    //public DcMotor lift;
-    //public Servo spoolControl;
+    public DcMotor lift;
+    public DcMotor spoolControl;
     //to be continued
 
     //constuctor
@@ -34,8 +35,8 @@ public class Robot {
         bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Intake
-        //lift = hMap.dcMotor.get("lift");
-        //spoolControl = hMap.servo.get("spoolControl");
+        lift = hMap.dcMotor.get("lift");
+        spoolControl = hMap.dcMotor.get("spoolControl");
     }
 
     //extra functions for quality of life
