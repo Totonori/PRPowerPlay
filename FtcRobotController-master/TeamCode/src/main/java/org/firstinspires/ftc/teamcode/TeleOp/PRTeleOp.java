@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
 
-@TeleOp(name="org.firstinspires.ftc.teamcode.TeleOp.PRTeleOp")
+@TeleOp(name="PRTeleOp")
 public class PRTeleOp extends OpMode {
 
     Robot PRobot = new Robot();
@@ -21,32 +21,37 @@ public class PRTeleOp extends OpMode {
 
     @Override
     public void loop() {
-        if (Math.abs(-gamepad1.left_stick_y) > .1) {
-            PRobot.drive(-gamepad1.left_stick_y);
+        if (Math.abs(gamepad1.left_stick_y) > .1) {
+            PRobot.drive(gamepad1.left_stick_y,-gamepad1.left_stick_y,gamepad1.left_stick_y,-gamepad1.left_stick_y);
             telemetry.addData("Moving U/D",-gamepad1.left_stick_y);
+            telemetry.addLine();
             telemetry.update();
 
         }
         else if (gamepad1.right_stick_x < 0 || gamepad1.right_stick_x > 0){
-            PRobot.drive(-gamepad1.right_stick_x,gamepad1.right_stick_x,-gamepad1.right_stick_x,gamepad1.right_stick_x);
+            PRobot.drive(-gamepad1.right_stick_x);
             telemetry.addData("Turning L/R", gamepad1.right_stick_x);
+            telemetry.addLine();
             telemetry.update();
         }
         else if (gamepad1.left_bumper){
             PRobot.fL.setPower(1);
             PRobot.bL.setPower(-1);
-            PRobot.fR.setPower(-1);
-            PRobot.bR.setPower(1);
+            PRobot.fR.setPower(1);
+            PRobot.bR.setPower(-1);
             telemetry.addData("Strafe Left",gamepad1.left_bumper);
             telemetry.update();
         }
         else if (gamepad1.right_bumper){
             PRobot.fL.setPower(-1);
             PRobot.bL.setPower(1);
-            PRobot.fR.setPower(1);
-            PRobot.bR.setPower(-1);
+            PRobot.fR.setPower(-1);
+            PRobot.bR.setPower(1);
             telemetry.addData("Strafe Right",gamepad1.right_bumper);
             telemetry.update();
+        }
+        else{
+            PRobot.stopWheels();
         }
     }
 }
