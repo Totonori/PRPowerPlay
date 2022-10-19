@@ -48,6 +48,26 @@ public class PRTeleOp extends OpMode {
             telemetry.addData("Strafe Right",gamepad1.right_bumper);
             telemetry.update();
         }
+        else{
+            PRobot.fL.setPower(0);
+            PRobot.bL.setPower(0);
+            PRobot.fR.setPower(0);
+            PRobot.bR.setPower(0);
+        }
+
+        if (gamepad2.dpad_up){
+            PRobot.lift.setPower(1);
+            telemetry.addData("Lift Up",gamepad2.dpad_up);
+            telemetry.update();
+        }
+        else if (gamepad2.dpad_down){
+            PRobot.lift.setPower(-1);
+            telemetry.addData("Lift Down",gamepad2.dpad_down);
+            telemetry.update();
+        }
+        else{
+            PRobot.lift.setPower(0);
+        }
     }
 }
 
