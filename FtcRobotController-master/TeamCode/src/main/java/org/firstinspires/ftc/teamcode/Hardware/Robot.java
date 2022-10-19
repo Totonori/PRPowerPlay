@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -14,7 +15,7 @@ public class Robot {
 
     //Intake
     public DcMotor lift;
-    //public  spoolControl;
+    public DcMotor spoolControl;
     //to be continued
 
     //constuctor
@@ -35,7 +36,7 @@ public class Robot {
 
         //Intake
         lift = hMap.dcMotor.get("lift");
-        //spoolControl = hMap.servo.get("spoolControl");
+        spoolControl = hMap.dcMotor.get("spoolControl");
     }
 
     //extra functions for quality of life
