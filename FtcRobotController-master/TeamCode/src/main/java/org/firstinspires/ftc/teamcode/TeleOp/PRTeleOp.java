@@ -35,18 +35,18 @@ public class PRTeleOp extends OpMode {
             telemetry.update();
         }
         else if (gamepad1.left_bumper){
-            PRobot.fL.setPower(1);
-            PRobot.bL.setPower(-1);
-            PRobot.fR.setPower(1);
-            PRobot.bR.setPower(-1);
+            PRobot.fL.setPower(0.6);
+            PRobot.bL.setPower(-0.6);
+            PRobot.fR.setPower(0.6);
+            PRobot.bR.setPower(-0.6);
             telemetry.addData("Strafe Left",gamepad1.left_bumper);
             telemetry.update();
         }
         else if (gamepad1.right_bumper){
-            PRobot.fL.setPower(-1);
-            PRobot.bL.setPower(1);
-            PRobot.fR.setPower(-1);
-            PRobot.bR.setPower(1);
+            PRobot.fL.setPower(-0.6);
+            PRobot.bL.setPower(0.6);
+            PRobot.fR.setPower(-0.6);
+            PRobot.bR.setPower(0.6);
             telemetry.addData("Strafe Right",gamepad1.right_bumper);
             telemetry.update();
         }
