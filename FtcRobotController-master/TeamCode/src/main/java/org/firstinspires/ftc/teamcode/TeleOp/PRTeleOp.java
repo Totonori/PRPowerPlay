@@ -22,14 +22,14 @@ public class PRTeleOp extends OpMode {
     @Override
     public void loop() {
         if (Math.abs(gamepad1.left_stick_y) > .1) {
-            PRobot.drive(gamepad1.left_stick_y,-gamepad1.left_stick_y,gamepad1.left_stick_y,-gamepad1.left_stick_y);
+            PRobot.drive(gamepad1.left_stick_y*.7,-gamepad1.left_stick_y*.7,gamepad1.left_stick_y*.7,-gamepad1.left_stick_y*.7);
             telemetry.addData("Moving U/D",-gamepad1.left_stick_y);
             telemetry.addLine();
             telemetry.update();
 
         }
         else if (gamepad1.right_stick_x < 0 || gamepad1.right_stick_x > 0){
-            PRobot.drive(-gamepad1.right_stick_x);
+            PRobot.drive(-gamepad1.right_stick_x*.7);
             telemetry.addData("Turning L/R", gamepad1.right_stick_x);
             telemetry.addLine();
             telemetry.update();

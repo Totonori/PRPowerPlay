@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -23,6 +25,7 @@ public class Robot {
     public Robot() {
 
     }
+
     public void init(HardwareMap hMap) {
         //Drivetrain
         fL = hMap.dcMotor.get("fL");
@@ -37,20 +40,22 @@ public class Robot {
 
         //Intake
         lift = hMap.dcMotor.get("lift");
-        spoolControl = hMap.get(DcMotorEx.class,"spoolControl");
+        spoolControl = hMap.get(DcMotorEx.class, "spoolControl");
     }
 
     //extra functions for quality of life
-    public void drive(double power){
-        drive(power,power,power,power);
+    public void drive(double power) {
+        drive(power, power, power, power);
     }
+
     public void drive(double frL, double frR, double brL, double brR) {
-        fL.setPower(dtSpeed*frL);
-        fR.setPower(dtSpeed*frR);
-        bL.setPower(dtSpeed*brL);
-        bR.setPower(dtSpeed*brR);
+        fL.setPower(dtSpeed * frL);
+        fR.setPower(dtSpeed * frR);
+        bL.setPower(dtSpeed * brL);
+        bR.setPower(dtSpeed * brR);
     }
-    public void stopWheels(){
+
+    public void stopWheels() {
         fR.setPower(0);
         fL.setPower(0);
         bR.setPower(0);

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonomous;
+package Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
-@Autonomous (name = "PRRedPark")
-public class PRSimpleAuto extends LinearOpMode {
+@Autonomous (name = "ArmEcTest")
+public class PRArmEcTest extends LinearOpMode {
 
     Robot PRobot = new Robot();
 
@@ -37,6 +37,7 @@ public class PRSimpleAuto extends LinearOpMode {
     Double bias = 0.8;
     Double meccyBias = 0.9;
 
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -44,11 +45,9 @@ public class PRSimpleAuto extends LinearOpMode {
 
         PRobot.init(hardwareMap);
 
-        liftEncoderDrive(0.7, LVL_2_INCHES, 0.5);
+        liftEncoderDrive(0.5, LVL_2_INCHES, 0.5);
+        sleep(200);
 
-        strafeToPosition(30, Drive_Speed, 0);
-
-        sleep(100);
     }
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newFrontLeftTarget;
