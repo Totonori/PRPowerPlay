@@ -1,4 +1,4 @@
-package Tests;
+package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
-@Autonomous (name = "ArmEcTest")
-public class PRArmEcTest extends LinearOpMode {
+
+@Autonomous (name = "PRRedScore")
+public class PRScoreAuto extends LinearOpMode {
 
     Robot PRobot = new Robot();
 
@@ -26,9 +27,9 @@ public class PRArmEcTest extends LinearOpMode {
     static final double     SPROCKET_DIAMETER_INCHES   = 3.0;     // For figuring circumference
 
     static final double     ARM_PER_INCH         = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double     LVL_1_INCHES         = 3.0;
-    static final double     LVL_2_INCHES         = 24.0;
-    static final double     LVL_3_INCHES         = 19.0;
+    static final double     LVL_1_INCHES         = 4.0;
+    static final double     LVL_2_INCHES         = 30.0;
+    static final double     LVL_3_INCHES         = 32.0;
 
     Integer cpr = 28;
     Integer gearratio = (((1 + (46 / 17))) * (1 + (46 / 11)));
@@ -37,7 +38,6 @@ public class PRArmEcTest extends LinearOpMode {
     Double bias = 0.8;
     Double meccyBias = 0.9;
 
-
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -45,10 +45,33 @@ public class PRArmEcTest extends LinearOpMode {
 
         PRobot.init(hardwareMap);
 
-        liftEncoderDrive(0.5, LVL_2_INCHES, 1);
-        sleep(800);
+        strafeToPosition(-11, Drive_Speed, 0);
+        sleep(300);
 
-        liftEncoderDrive(0.5,-LVL_1_INCHES,0.5);
+        liftEncoderDrive(0.7, LVL_2_INCHES, 1);
+        sleep(400);
+
+        encoderDrive(0.6,6,6,1);
+        sleep(300);
+
+        liftEncoderDrive(0.5,-LVL_1_INCHES, 0.5);
+        sleep(400);
+
+        PRobot.spoolControl.setPower(1);
+        sleep(200);
+
+        PRobot.spoolControl.setPower(0);
+        sleep(200);
+
+        liftEncoderDrive(0.5,LVL_2_INCHES, 0.5);
+        sleep(400);
+
+        encoderDrive(0.6,-10,-10,1);
+        sleep(300);
+
+        strafeToPosition(50, Drive_Speed, 0);
+
+        sleep(100);
     }
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newFrontLeftTarget;
@@ -60,8 +83,8 @@ public class PRArmEcTest extends LinearOpMode {
         if (opModeIsActive()) {
 
             //Determine new target position/send to controller
-            newFrontLeftTarget = PRobot.fL.getCurrentPosition() + (int) (leftInches * Counts_Per_In);
-            newBackLeftTarget = PRobot.bL.getCurrentPosition() + (int) (leftInches * Counts_Per_In);
+            newFrontLeftTarget = PRobot.fL.getCurrentPosition() + (int) (-leftInches * Counts_Per_In);
+            newBackLeftTarget = PRobot.bL.getCurrentPosition() + (int) (-leftInches * Counts_Per_In);
             newFrontRightTarget = PRobot.fR.getCurrentPosition() + (int) (rightInches *Counts_Per_In);
             newBackRightTarget = PRobot.bR.getCurrentPosition() + (int) (rightInches * Counts_Per_In);
 
