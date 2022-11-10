@@ -21,6 +21,7 @@ public class PRTeleOp extends OpMode {
 
     @Override
     public void loop() {
+
         if (Math.abs(gamepad1.left_stick_y) > .1) {
             PRobot.drive(gamepad1.left_stick_y*.7,-gamepad1.left_stick_y*.7,gamepad1.left_stick_y*.7,-gamepad1.left_stick_y*.7);
             telemetry.addData("Moving U/D",-gamepad1.left_stick_y);
@@ -35,18 +36,18 @@ public class PRTeleOp extends OpMode {
             telemetry.update();
         }
         else if (gamepad1.left_bumper){
-            PRobot.fL.setPower(0.6);
-            PRobot.bL.setPower(-0.6);
-            PRobot.fR.setPower(0.6);
-            PRobot.bR.setPower(-0.6);
+            PRobot.fL.setPower(0.4);
+            PRobot.bL.setPower(-0.4);
+            PRobot.fR.setPower(0.4);
+            PRobot.bR.setPower(-0.4);
             telemetry.addData("Strafe Left",gamepad1.left_bumper);
             telemetry.update();
         }
         else if (gamepad1.right_bumper){
-            PRobot.fL.setPower(-0.6);
-            PRobot.bL.setPower(0.6);
-            PRobot.fR.setPower(-0.6);
-            PRobot.bR.setPower(0.6);
+            PRobot.fL.setPower(-0.4);
+            PRobot.bL.setPower(0.4);
+            PRobot.fR.setPower(-0.4);
+            PRobot.bR.setPower(0.4);
             telemetry.addData("Strafe Right",gamepad1.right_bumper);
             telemetry.update();
         }
