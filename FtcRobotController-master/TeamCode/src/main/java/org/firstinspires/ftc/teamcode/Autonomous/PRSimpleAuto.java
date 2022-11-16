@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
-@Autonomous (name = "PRRedPark")
+@Autonomous (name = "PRRedPark", group = "RedAutos")
 public class PRSimpleAuto extends LinearOpMode {
 
     Robot PRobot = new Robot();

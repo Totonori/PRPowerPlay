@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
 
-@Autonomous (name = "PRBLuePark")
+@Autonomous (name = "PRBLuePark", group = "BlueAutos")
 public class PRSimpleAutoBlue extends LinearOpMode {
 
     Robot PRobot = new Robot();

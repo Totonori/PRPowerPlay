@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
-@TeleOp (name = "bRTest")
+@TeleOp (name = "bRTest", group = "Tests")
 public class bRTest extends OpMode {
 
     Robot PRobot = new Robot();

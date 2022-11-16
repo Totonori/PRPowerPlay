@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
-@Autonomous (name = "ArmEcTest")
+@Autonomous (name = "ArmEcTest", group = "Tests")
 public class PRArmEcTest extends LinearOpMode {
 
     Robot PRobot = new Robot();

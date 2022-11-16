@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
 
-@TeleOp(name="PRTeleOp")
+@TeleOp(name="PRTeleOp", group = "TeleOp")
 public class PRTeleOp extends OpMode {
 
     Robot PRobot = new Robot();
@@ -57,12 +57,12 @@ public class PRTeleOp extends OpMode {
         }
 
         if (gamepad2.dpad_up){
-            PRobot.lift.setPower(1);
+            PRobot.lift.setPower(0.85);
             telemetry.addData("Lift Up",gamepad2.dpad_up);
             telemetry.update();
         }
         else if (gamepad2.dpad_down){
-            PRobot.lift.setPower(-1);
+            PRobot.lift.setPower(-0.85);
             telemetry.addData("Lift Down",gamepad2.dpad_down);
             telemetry.update();
         }
