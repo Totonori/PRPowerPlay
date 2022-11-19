@@ -35,7 +35,7 @@ public class PRTeleOp extends OpMode {
             telemetry.addLine();
             telemetry.update();
         }
-        else if (gamepad1.left_bumper){
+        else if (gamepad1.dpad_left){
             PRobot.fL.setPower(0.4);
             PRobot.bL.setPower(-0.4);
             PRobot.fR.setPower(0.4);
@@ -43,7 +43,7 @@ public class PRTeleOp extends OpMode {
             telemetry.addData("Strafe Left",gamepad1.left_bumper);
             telemetry.update();
         }
-        else if (gamepad1.right_bumper){
+        else if (gamepad1.dpad_right){
             PRobot.fL.setPower(-0.4);
             PRobot.bL.setPower(0.4);
             PRobot.fR.setPower(-0.4);
@@ -57,12 +57,12 @@ public class PRTeleOp extends OpMode {
         }
 
         if (gamepad2.dpad_up){
-            PRobot.lift.setPower(0.85);
+            PRobot.lift.setPower(0.7);
             telemetry.addData("Lift Up",gamepad2.dpad_up);
             telemetry.update();
         }
         else if (gamepad2.dpad_down){
-            PRobot.lift.setPower(-0.85);
+            PRobot.lift.setPower(-0.7);
             telemetry.addData("Lift Down",gamepad2.dpad_down);
             telemetry.update();
         }
