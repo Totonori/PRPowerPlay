@@ -13,13 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrangePipeline extends OpenCvPipeline {
-    enum SleevePosition {
-        Middle,
-        None
-    }
-
     private int width;
-    SleevePosition location;
+
+    public OrangePipeline() {
+
+    }
 
     public OrangePipeline(int width) {
         this.width = width;
@@ -29,16 +27,23 @@ public class OrangePipeline extends OpenCvPipeline {
     public Mat processFrame(Mat input) {
         Mat mat = new Mat();
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
-
         if (mat.empty()) {
-            location = SleevePosition.None;
             return input;
         }
-        Scalar lowHSV = new Scalar(23, 100, 86);
+        Scalar lowHSV = new Scalar(36, 70, 80);
         Scalar highHSV = new Scalar(38, 100, 100);
+
         Mat thresh = new Mat();
 
         Core.inRange(mat, lowHSV, highHSV, thresh);
+
+        Mat masked = new Mat();
+        Core.bitwise_and(mat, mat, masked, thresh);
+
+        Scalar average = Core.mean(masked, thresh);
+
+        Mat scaledmask = new Mat();
+        masked.convertTo(scaledmask, );
 
         Mat edges = new Mat();
         Imgproc.Canny(thresh, edges, 100, 300);
@@ -57,25 +62,18 @@ public class OrangePipeline extends OpenCvPipeline {
 
         }
 
-        double middle_x = 0.25 * width;
-        double none_x = 0.75 * width;
-        boolean middle = false; // true if regular stone found on the left side
-        boolean none = false; // "" "" on the right side
+        double middle_x = .5 * width;
+        double filler_x = 1 * width;
+        boolean middle = false; // true if regular stone found in the middle side
+        boolean filler = false; // "" "" on the right side
         for (int i = 0; i != boundRect.length; i++) {
             if (boundRect[i].x < middle_x)
                 middle = true;
-            if (boundRect[i].x + boundRect[i].width > none_x)
-                none = true;
+            if (boundRect[i].x + boundRect[i].width > filler_x)
+                filler = true;
 
             Imgproc.rectangle(mat, boundRect[i], new Scalar(0.5, 76.9, 89.8));
         }
-
-        if (!middle) location = SleevePosition.Middle;
-        else location = SleevePosition.None;
-
         return mat;
-    }
-    public SleevePosition getLocation(){
-        return this.location;
     }
 }
