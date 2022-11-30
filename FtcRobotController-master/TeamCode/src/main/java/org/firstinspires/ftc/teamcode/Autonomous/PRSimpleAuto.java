@@ -44,8 +44,6 @@ public class PRSimpleAuto extends LinearOpMode {
 
         PRobot.init(hardwareMap);
 
-        liftEncoderDrive(0.7, LVL_2_INCHES, 0.5);
-
         strafeToPosition(30, Drive_Speed, 0);
 
         sleep(100);
