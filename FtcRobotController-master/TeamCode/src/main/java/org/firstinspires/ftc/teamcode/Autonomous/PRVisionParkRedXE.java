@@ -19,7 +19,6 @@ public class PRVisionParkRedXE extends LinearOpMode {
 
     private SleeveDetection sleeveDetection;
     private OpenCvWebcam webcam;
-    SleeveDetection position = new SleeveDetection();
 
 
     private String webcamName = "Webcam 1";
@@ -61,19 +60,71 @@ public class PRVisionParkRedXE extends LinearOpMode {
         while (opModeIsActive()) {
 
             sleep(2000);
-            telemetry.addData("Position", position.getPosition());
+            telemetry.addData("Position: ", sleeveDetection.getPosition());
             telemetry.update();
 
             switch (sleeveDetection.getPosition()){
                 case LEFT:
+                    //Strafe Left
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(1000);
+
                     //Move Forward
-                    PRobot.fR.setPower(1);
-                    PRobot.bR.setPower(1);
-                    PRobot.fL.setPower(-1);
-                    PRobot.bL.setPower(-1);
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(-0.5);
+                    sleep(700);
 
+                    break;
+
+                case CENTER:
+                    //Strafe Left
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(1000);
+
+                    //Move Forward
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(-0.5);
+                    sleep(1500);
+
+                    //Strafe Right
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(-0.5);
+                    sleep(1000);
+
+                    break;
+
+                case RIGHT:
+                    //Strafe Right
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(-0.5);
+                    sleep(1000);
+
+                    //Move Forward
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(-0.5);
+                    sleep(700);
+
+                    break;
             }
-
+            webcam.stopStreaming();
+            webcam.closeCameraDevice();
+            break;
         }
     }
 }
