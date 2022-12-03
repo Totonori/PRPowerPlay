@@ -1,4 +1,4 @@
-package Tests;
+package org.firstinspires.ftc.teamcode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,8 +12,10 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name = "Signal Sleeve Test")
-public class VisionTest extends LinearOpMode {
+@Autonomous(name = "Signal Sleeve Red")
+public class PRVisionParkRed extends LinearOpMode {
+
+    Robot PRobot = new Robot();
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -25,14 +27,14 @@ public class VisionTest extends LinearOpMode {
     static final double Turn_Speed = .3;
 
     //values for arm
-    static final double     COUNTS_PER_ARM_MOTOR_REV    = 312;  // eg: TETRIX Motor Encoder //2150.8
-    static final double     ARM_GEAR_REDUCTION    = 0.3;        // This is < 1.0 if geared UP
-    static final double     SPROCKET_DIAMETER_INCHES   = 3.0;     // For figuring circumference
+    static final double COUNTS_PER_ARM_MOTOR_REV = 312;  // eg: TETRIX Motor Encoder //2150.8
+    static final double ARM_GEAR_REDUCTION = 0.3;        // This is < 1.0 if geared UP
+    static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
-    static final double     ARM_PER_INCH         = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double     LVL_1_INCHES         = 5.0;
-    static final double     LVL_2_INCHES         = 8.0;
-    static final double     LVL_3_INCHES         = 19.0;
+    static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
+    static final double LVL_1_INCHES = 5.0;
+    static final double LVL_2_INCHES = 8.0;
+    static final double LVL_3_INCHES = 19.0;
 
     Integer cpr = 28;
     Integer gearratio = (((1 + (46 / 17))) * (1 + (46 / 11)));
@@ -41,10 +43,12 @@ public class VisionTest extends LinearOpMode {
     Double bias = 0.8;
     Double meccyBias = 0.9;
 
-    Robot PRobot = new Robot();
     SleeveDetection position = new SleeveDetection();
     SleeveDetection sleeveDetection;
-    OpenCvCamera camera;
+    OpenCvCamera webcam;
+
+    int wait = 500;
+
 
 
     // Name of the Webcam to be set in the config
@@ -52,73 +56,139 @@ public class VisionTest extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Robot PRobot = new Robot();
+        PRobot.init(hardwareMap);
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, webcamName), cameraMonitorViewId);
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, webcamName), cameraMonitorViewId);
         sleeveDetection = new SleeveDetection();
-        camera.setPipeline(sleeveDetection);
+        webcam.setPipeline(sleeveDetection);
 
-        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
-            @Override
-            public void onOpened()
-            {
-                camera.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
-            }
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+                                         @Override
+                                         public void onOpened() {
+                                             webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                                         }
 
-            @Override
-            public void onError(int errorCode) {}
-        }
+                                         @Override
+                                         public void onError(int errorCode) {
+                                         }
+                                     }
         );
-
 
 
         while (!isStarted()) {
             telemetry.addData("ROTATION: ", sleeveDetection.getPosition());
             telemetry.update();
         }
+        telemetry.setMsTransmissionInterval(20);
+
+        telemetry.addLine("Waiting for start");
+        telemetry.update();
 
         waitForStart();
 
-        while(opModeIsActive()){
 
-            sleep(3000);
+
+        while (opModeIsActive()) {
+
+            sleep(2000);
             telemetry.addData("Position", position.getPosition());
             telemetry.update();
 
 
-            switch (position.getPosition()) {
+            switch (sleeveDetection.getPosition()) {
                 case LEFT:
-                    strafeToPosition(25, Drive_Speed, 1);
+                    encoderDrive(Drive_Speed,30,30,2);
+                    sleep(1000);
 
-                    encoderDrive(Drive_Speed, -30, 30, 1);
+                    strafeToPosition(25,Drive_Speed,3);
+                    sleep(1000);
 
                     break;
 
                 case CENTER:
-                    strafeToPosition(25, Drive_Speed, 1);
-
-                    encoderDrive(Drive_Speed, -30, 30, 1);
-
-                    strafeToPosition(-10, Drive_Speed, 1);
+                    encoderDrive(Drive_Speed,30,30,2);
+                    sleep(1000);
 
                     break;
 
                 case RIGHT:
-                    strafeToPosition(-25, Drive_Speed, 1);
+                    encoderDrive(Drive_Speed, 30, 30, 2);
+                    sleep(1000);
 
-                    encoderDrive(Drive_Speed, -30, 30, 1);
+                    strafeToPosition(-30,Drive_Speed,3);
+                    sleep(1000);
 
                     break;
             }
 
-            camera.stopStreaming();
-            camera.closeCameraDevice();
+            webcam.stopStreaming();
+            webcam.closeCameraDevice();
             break;
 
+        }
+
+    }
+
+    public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
+        int newFrontLeftTarget;
+        int newBackLeftTarget;
+        int newFrontRightTarget;
+        int newBackRightTarget;
+
+        //Ensure opmode is still active
+        if (opModeIsActive()) {
+
+            //Determine new target position/send to controller
+            newFrontLeftTarget = PRobot.fL.getCurrentPosition() + (int) (-leftInches * Counts_Per_In);
+            newBackLeftTarget = PRobot.bL.getCurrentPosition() + (int) (-leftInches * Counts_Per_In);
+            newFrontRightTarget = PRobot.fR.getCurrentPosition() + (int) (rightInches * Counts_Per_In);
+            newBackRightTarget = PRobot.bR.getCurrentPosition() + (int) (rightInches * Counts_Per_In);
+
+            PRobot.fL.setTargetPosition(newFrontLeftTarget);
+            PRobot.bL.setTargetPosition(newBackLeftTarget);
+            PRobot.fR.setTargetPosition(newFrontRightTarget);
+            PRobot.bR.setPower(newBackRightTarget);
+
+            //Turns on RUN_TO_POSITION
+            PRobot.fL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            PRobot.bL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            PRobot.fR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            PRobot.bR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            //resets timeout, starts motion
+            runtime.reset();
+
+            PRobot.fL.setPower(Math.abs(speed));
+            PRobot.bL.setPower(Math.abs(speed));
+            PRobot.fR.setPower(Math.abs(speed));
+            PRobot.bR.setPower(Math.abs(speed));
+
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (PRobot.fL.isBusy() && PRobot.bL.isBusy() && PRobot.fR.isBusy() && PRobot.bR.isBusy())) {
+
+                telemetry.addData("Running to", "%7d :%7d",
+                        PRobot.fL.getCurrentPosition(), PRobot.bL.getCurrentPosition(), PRobot.fR.getCurrentPosition(), PRobot.bR.getCurrentPosition());
+                telemetry.update();
             }
 
+            //stop all motion
+            PRobot.fL.setPower(0);
+            PRobot.bL.setPower(0);
+            PRobot.fR.setPower(0);
+            PRobot.bR.setPower(0);
+
+            //Turn off RUN_TO_POSITION
+            PRobot.fL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            PRobot.bL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            PRobot.fR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            PRobot.bR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            // sleep(250);
         }
+    }
+
     public void strafeToPosition(double inches, double speed, double timeoutS) {
 
         int move = (int) (Math.round(inches * cpi * meccyBias * 1.265));
@@ -155,6 +225,7 @@ public class VisionTest extends LinearOpMode {
         PRobot.bR.setPower(0);
         return;
     }
+
     public void liftEncoderDrive(double speed,
                                  double inches,
                                  double timeoutS) {
@@ -227,63 +298,4 @@ public class VisionTest extends LinearOpMode {
             sleep(250);   // optional pause after each move
         }
     }
-        public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
-            int newFrontLeftTarget;
-            int newBackLeftTarget;
-            int newFrontRightTarget;
-            int newBackRightTarget;
-
-            //Ensure opmode is still active
-            if (opModeIsActive()) {
-
-                //Determine new target position/send to controller
-                newFrontLeftTarget = PRobot.fL.getCurrentPosition() + (int) (leftInches * Counts_Per_In);
-                newBackLeftTarget = PRobot.bL.getCurrentPosition() + (int) (leftInches * Counts_Per_In);
-                newFrontRightTarget = PRobot.fR.getCurrentPosition() + (int) (rightInches *Counts_Per_In);
-                newBackRightTarget = PRobot.bR.getCurrentPosition() + (int) (rightInches * Counts_Per_In);
-
-                PRobot.fL.setTargetPosition(newFrontLeftTarget);
-                PRobot.bL.setTargetPosition(newBackLeftTarget);
-                PRobot.fR.setTargetPosition(newFrontRightTarget);
-                PRobot.bR.setPower(newBackRightTarget);
-
-                //Turns on RUN_TO_POSITION
-                PRobot.fL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                PRobot.bL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                PRobot.fR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                PRobot.bR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-                //resets timeout, starts motion
-                runtime.reset();
-
-                PRobot.fL.setPower(Math.abs(speed));
-                PRobot.bL.setPower(Math.abs(speed));
-                PRobot.fR.setPower(Math.abs(speed));
-                PRobot.bR.setPower(Math.abs(speed));
-
-                while (opModeIsActive() &&
-                        (runtime.seconds() < timeoutS) &&
-                        (PRobot.fL.isBusy() && PRobot.bL.isBusy() && PRobot.fR.isBusy() && PRobot.bR.isBusy())) {
-
-                    telemetry.addData("Running to", "%7d :%7d",
-                            PRobot.fL.getCurrentPosition(), PRobot.bL.getCurrentPosition(), PRobot.fR.getCurrentPosition(), PRobot.bR.getCurrentPosition());
-                    telemetry.update();
-                }
-
-                //stop all motion
-                PRobot.fL.setPower(0);
-                PRobot.bL.setPower(0);
-                PRobot.fR.setPower(0);
-                PRobot.bR.setPower(0);
-
-                //Turn off RUN_TO_POSITION
-                PRobot.fL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                PRobot.bL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                PRobot.fR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                PRobot.bR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-                sleep(250);
-            }
-    }
-
 }
