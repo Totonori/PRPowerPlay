@@ -9,7 +9,6 @@ import org.firstinspires.ftc.teamcode.Hardware.Robot;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 
 @Autonomous (name = "Signal Sleeve Red (NO ENCODERS)")
@@ -68,8 +67,8 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     //Strafe Left
                     PRobot.fR.setPower(0.5);
                     PRobot.bR.setPower(-0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(-0.5);
                     sleep(1000);
 
                     //Move Forward
@@ -85,8 +84,8 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     //Strafe Left
                     PRobot.fR.setPower(0.5);
                     PRobot.bR.setPower(-0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(-0.5);
                     sleep(1000);
 
                     //Move Forward
@@ -99,8 +98,8 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     //Strafe Right
                     PRobot.fR.setPower(-0.5);
                     PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(0.5);
-                    PRobot.bL.setPower(-0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(0.5);
                     sleep(1000);
 
                     break;
@@ -109,8 +108,8 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     //Strafe Right
                     PRobot.fR.setPower(-0.5);
                     PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(0.5);
-                    PRobot.bL.setPower(-0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(0.5);
                     sleep(1000);
 
                     //Move Forward
