@@ -21,6 +21,7 @@ public class Robot {
     public DcMotor lift;
     public CRServo claw1;
     public CRServo claw2;
+    public CRServo arm;
     //to be continued
 
     //constuctor

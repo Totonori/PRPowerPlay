@@ -22,5 +22,16 @@ public class PRClaw extends OpMode {
             PRobot.claw2.setPower(-1);
 
         }
+        else {
+            PRobot.claw1.setPower(0);
+            PRobot.claw2.setPower(0);
+        }
+    if (gamepad1.b) {
+        PRobot.arm.setPower(1);
+
+    }
+    else {
+        PRobot.arm.setPower(0);
+    }
     }
     }
