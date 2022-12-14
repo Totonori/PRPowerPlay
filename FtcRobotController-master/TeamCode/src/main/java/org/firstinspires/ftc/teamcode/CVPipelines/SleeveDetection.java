@@ -25,14 +25,14 @@ public class SleeveDetection extends OpenCvPipeline {
     private static Point SLEEVE_TOPLEFT_ANCHOR_POINT = new Point(145, 168);
 
     // Width and height for the bounding box
-    public static int REGION_WIDTH = 80;
-    public static int REGION_HEIGHT = -120;
+    public static int REGION_WIDTH = 60;
+    public static int REGION_HEIGHT = -90;
 
     // Color definitions
     private final Scalar
             Orange  = new Scalar(254, 143, 0),
             Purple    = new Scalar(189, 104, 250),
-            Green = new Scalar(58, 255, 5);
+            Green = new Scalar(170, 255, 5);
 
     // Anchor point definitions
     Point sleeve_pointA = new Point(
@@ -56,7 +56,7 @@ public class SleeveDetection extends OpenCvPipeline {
 
         // Change the bounding box color based on the sleeve color
         if (sumColors.val[0] == minColor) {
-            position = ParkingPosition.CENTER;
+            position = ParkingPosition.RIGHT;
             Imgproc.rectangle(
                     input,
                     sleeve_pointA,
@@ -65,7 +65,7 @@ public class SleeveDetection extends OpenCvPipeline {
                     2
             );
         } else if (sumColors.val[1] == minColor) {
-            position = ParkingPosition.RIGHT;
+            position = ParkingPosition.CENTER;
             Imgproc.rectangle(
                     input,
                     sleeve_pointA,

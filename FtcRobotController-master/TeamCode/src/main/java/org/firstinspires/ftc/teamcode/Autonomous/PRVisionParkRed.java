@@ -1,13 +1,19 @@
 package org.firstinspires.ftc.teamcode.Autonomous;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.CVPipelines.SleeveDetection;
+import org.firstinspires.ftc.teamcode.CVPipelines.SleeveDetection.ParkingPosition;
 import org.firstinspires.ftc.teamcode.Hardware.Robot;
-@Autonomous (name = "PRRedPark", group = "RedAutos")
-public class PRSimpleAuto extends LinearOpMode {
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+
+@Autonomous(name = "Signal Sleeve Red")
+public class PRVisionParkRed extends LinearOpMode {
 
     Robot PRobot = new Robot();
 
@@ -21,14 +27,14 @@ public class PRSimpleAuto extends LinearOpMode {
     static final double Turn_Speed = .3;
 
     //values for arm
-    static final double     COUNTS_PER_ARM_MOTOR_REV    = 312;  // eg: TETRIX Motor Encoder //2150.8
-    static final double     ARM_GEAR_REDUCTION    = 0.3;        // This is < 1.0 if geared UP
-    static final double     SPROCKET_DIAMETER_INCHES   = 3.0;     // For figuring circumference
+    static final double COUNTS_PER_ARM_MOTOR_REV = 312;  // eg: TETRIX Motor Encoder //2150.8
+    static final double ARM_GEAR_REDUCTION = 0.3;        // This is < 1.0 if geared UP
+    static final double SPROCKET_DIAMETER_INCHES = 3.0;     // For figuring circumference
 
-    static final double     ARM_PER_INCH         = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
-    static final double     LVL_1_INCHES         = 5.0;
-    static final double     LVL_2_INCHES         = 8.0;
-    static final double     LVL_3_INCHES         = 19.0;
+    static final double ARM_PER_INCH = (COUNTS_PER_ARM_MOTOR_REV * ARM_GEAR_REDUCTION) / (SPROCKET_DIAMETER_INCHES * 3.1415);
+    static final double LVL_1_INCHES = 5.0;
+    static final double LVL_2_INCHES = 8.0;
+    static final double LVL_3_INCHES = 19.0;
 
     Integer cpr = 28;
     Integer gearratio = (((1 + (46 / 17))) * (1 + (46 / 11)));
@@ -37,17 +43,93 @@ public class PRSimpleAuto extends LinearOpMode {
     Double bias = 0.8;
     Double meccyBias = 0.9;
 
+    SleeveDetection position = new SleeveDetection();
+    SleeveDetection sleeveDetection;
+    OpenCvCamera webcam;
+
+    int wait = 500;
+
+
+
+    // Name of the Webcam to be set in the config
+    String webcamName = "Webcam 1";
+
     @Override
     public void runOpMode() throws InterruptedException {
+        PRobot.init(hardwareMap);
+
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, webcamName), cameraMonitorViewId);
+        sleeveDetection = new SleeveDetection();
+        webcam.setPipeline(sleeveDetection);
+
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+                                         @Override
+                                         public void onOpened() {
+                                             webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                                         }
+
+                                         @Override
+                                         public void onError(int errorCode) {
+                                         }
+                                     }
+        );
+
+
+        while (!isStarted()) {
+            telemetry.addData("ROTATION: ", sleeveDetection.getPosition());
+            telemetry.update();
+        }
+        telemetry.setMsTransmissionInterval(20);
+
+        telemetry.addLine("Waiting for start");
+        telemetry.update();
 
         waitForStart();
 
-        PRobot.init(hardwareMap);
 
-        strafeToPosition(30, Drive_Speed, 0);
 
-        sleep(100);
+        while (opModeIsActive()) {
+
+            sleep(2000);
+            telemetry.addData("Position", position.getPosition());
+            telemetry.update();
+
+
+            switch (sleeveDetection.getPosition()) {
+                case LEFT:
+                    encoderDrive(Drive_Speed,30,30,2);
+                    sleep(1000);
+
+                    strafeToPosition(25,Drive_Speed,3);
+                    sleep(1000);
+
+                    break;
+
+                case CENTER:
+                    encoderDrive(Drive_Speed,30,30,2);
+                    sleep(1000);
+
+                    break;
+
+                case RIGHT:
+                    encoderDrive(Drive_Speed, 30, 30, 2);
+                    sleep(1000);
+
+                    strafeToPosition(-30,Drive_Speed,3);
+                    sleep(1000);
+
+                    break;
+            }
+
+            webcam.stopStreaming();
+            webcam.closeCameraDevice();
+            break;
+
+        }
+
     }
+
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newFrontLeftTarget;
         int newBackLeftTarget;
@@ -58,9 +140,9 @@ public class PRSimpleAuto extends LinearOpMode {
         if (opModeIsActive()) {
 
             //Determine new target position/send to controller
-            newFrontLeftTarget = PRobot.fL.getCurrentPosition() + (int) (leftInches * Counts_Per_In);
-            newBackLeftTarget = PRobot.bL.getCurrentPosition() + (int) (leftInches * Counts_Per_In);
-            newFrontRightTarget = PRobot.fR.getCurrentPosition() + (int) (rightInches *Counts_Per_In);
+            newFrontLeftTarget = PRobot.fL.getCurrentPosition() + (int) (-leftInches * Counts_Per_In);
+            newBackLeftTarget = PRobot.bL.getCurrentPosition() + (int) (-leftInches * Counts_Per_In);
+            newFrontRightTarget = PRobot.fR.getCurrentPosition() + (int) (rightInches * Counts_Per_In);
             newBackRightTarget = PRobot.bR.getCurrentPosition() + (int) (rightInches * Counts_Per_In);
 
             PRobot.fL.setTargetPosition(newFrontLeftTarget);
@@ -103,9 +185,10 @@ public class PRSimpleAuto extends LinearOpMode {
             PRobot.fR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             PRobot.bR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(250);
+            // sleep(250);
         }
     }
+
     public void strafeToPosition(double inches, double speed, double timeoutS) {
 
         int move = (int) (Math.round(inches * cpi * meccyBias * 1.265));
@@ -142,9 +225,10 @@ public class PRSimpleAuto extends LinearOpMode {
         PRobot.bR.setPower(0);
         return;
     }
+
     public void liftEncoderDrive(double speed,
-                                double inches,
-                                double timeoutS) {
+                                 double inches,
+                                 double timeoutS) {
         int newarmTarget;
         // int newBackLeftTarget;
         //  int newFrontRightTarget;
