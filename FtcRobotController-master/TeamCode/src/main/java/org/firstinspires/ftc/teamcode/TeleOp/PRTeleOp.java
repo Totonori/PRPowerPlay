@@ -88,18 +88,26 @@ public class PRTeleOp extends OpMode {
         }
         if (gamepad2.left_trigger > .1){
             PRobot.arm.setPower(1);
+            telemetry.addData("Reverse",gamepad2.left_trigger);
+            telemetry.update();
         }
         else if (gamepad2.right_trigger > .1){
             PRobot.arm.setPower(-1);
+            telemetry.addData("Reverse Reverse",gamepad2.right_trigger);
+            telemetry.update();
         }
         else {
             PRobot.arm.setPower(0);
         }
         if (gamepad2.a){
             PRobot.thatonething.setPower(1);
+            telemetry.addData("Charlie Brown",gamepad2.a);
+            telemetry.update();
         }
         else if (gamepad2.b){
             PRobot.thatonething.setPower(-1);
+            telemetry.addData("Hop it out now",gamepad2.b);
+            telemetry.update();
         }
         else {
             PRobot.thatonething.setPower(0);
