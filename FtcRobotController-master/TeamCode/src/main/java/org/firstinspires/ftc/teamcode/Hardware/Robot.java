@@ -22,6 +22,7 @@ public class Robot {
     public CRServo claw1;
     public CRServo claw2;
     public CRServo arm;
+    public DcMotor chachaslide;
     //to be continued
 
     //constuctor
@@ -42,7 +43,10 @@ public class Robot {
         bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Intake
-        lift = hMap.dcMotor.get("lift");
+        chachaslide = hMap.dcMotor.get("chachaslide");
+        claw1 = hMap.crservo.get("claw1");
+        claw2 = hMap.crservo.get("claw2");
+        arm = hMap.crservo.get("arm");
     }
 
     //extra functions for quality of life

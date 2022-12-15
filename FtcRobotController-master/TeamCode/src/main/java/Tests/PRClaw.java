@@ -32,6 +32,16 @@ public class PRClaw extends OpMode {
     }
     else {
         PRobot.arm.setPower(0);
+
+        if (gamepad1.dpad_up) {
+            PRobot.chachaslide.setPower(1);
+        }
+        else if (gamepad1.dpad_down) {
+            PRobot.chachaslide.setPower(-1);
+        }
+        else {
+            PRobot.chachaslide.setPower(0);
+        }
     }
     }
     }

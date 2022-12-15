@@ -24,14 +24,14 @@ public class PRTeleOp extends OpMode {
 
         if (Math.abs(gamepad1.left_stick_y) > .1) {
             PRobot.drive(gamepad1.left_stick_y*.7,-gamepad1.left_stick_y*.7,gamepad1.left_stick_y*.7,-gamepad1.left_stick_y*.7);
-            telemetry.addData("Moving U/D",-gamepad1.left_stick_y);
+            telemetry.addData("Cha Cha Now Y'all",-gamepad1.left_stick_y);
             telemetry.addLine();
             telemetry.update();
 
         }
         else if (gamepad1.right_stick_x < 0 || gamepad1.right_stick_x > 0){
             PRobot.drive(-gamepad1.right_stick_x*.7);
-            telemetry.addData("Turning L/R", gamepad1.right_stick_x);
+            telemetry.addData("Chris Cross", gamepad1.right_stick_x);
             telemetry.addLine();
             telemetry.update();
         }
@@ -40,7 +40,7 @@ public class PRTeleOp extends OpMode {
             PRobot.bL.setPower(-0.4);
             PRobot.fR.setPower(0.4);
             PRobot.bR.setPower(-0.4);
-            telemetry.addData("Strafe Left",gamepad1.left_bumper);
+            telemetry.addData("Slide to the Left",gamepad1.left_bumper);
             telemetry.update();
         }
         else if (gamepad1.dpad_right){
@@ -48,7 +48,7 @@ public class PRTeleOp extends OpMode {
             PRobot.bL.setPower(0.4);
             PRobot.fR.setPower(-0.4);
             PRobot.bR.setPower(0.4);
-            telemetry.addData("Strafe Right",gamepad1.right_bumper);
+            telemetry.addData("Slide to the Right",gamepad1.right_bumper);
             telemetry.update();
         }
         else {
@@ -57,33 +57,46 @@ public class PRTeleOp extends OpMode {
         }
 
         if (gamepad2.dpad_up){
-            PRobot.lift.setPower(0.7);
-            telemetry.addData("Lift Up",gamepad2.dpad_up);
+            PRobot.chachaslide.setPower(0.7);
+            telemetry.addData("Can you bring it to the top",gamepad2.dpad_up);
             telemetry.update();
         }
         else if (gamepad2.dpad_down){
-            PRobot.lift.setPower(-0.7);
-            telemetry.addData("Lift Down",gamepad2.dpad_down);
+            PRobot.chachaslide.setPower(-0.7);
+            telemetry.addData("How low can you go",gamepad2.dpad_down);
             telemetry.update();
         }
         else{
-            PRobot.lift.setPower(0);
-        }
+            PRobot.chachaslide.setPower(0);
 
-        if (gamepad2.right_bumper){
-            PRobot.spoolControl.setPower(1);
+        }
+        if (gamepad2.left_bumper){
+            PRobot.claw1.setPower(1);
+            PRobot.claw2.setPower(-1);
+            telemetry.addData("Left foot 2 stomp",gamepad2.left_bumper);
+            telemetry.update();
+        }
+        else if (gamepad2.right_bumper){
+            PRobot.claw1.setPower(-1);
+            PRobot.claw2.setPower(1);
+            telemetry.addData("Right foot 2 stomp",gamepad2.right_bumper);
+            telemetry.update();
         }
         else {
-            PRobot.spoolControl.setPower(0);
+            PRobot.claw2.setPower(0);
+            PRobot.claw1.setPower(0);
         }
-
-        if(gamepad2.left_bumper){
-            PRobot.spoolControl.setPower(-1);
+        if (gamepad2.left_trigger > .1){
+            PRobot.arm.setPower(1);
+        }
+        else if (gamepad2.right_trigger > .1){
+            PRobot.arm.setPower(-1);
         }
         else {
-            PRobot.spoolControl.setPower(0);
+            PRobot.arm.setPower(0);
+        }
         }
     }
-}
+
 
 
