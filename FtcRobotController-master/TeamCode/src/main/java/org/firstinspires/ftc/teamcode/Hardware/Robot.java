@@ -23,6 +23,7 @@ public class Robot {
     public CRServo claw2;
     public CRServo arm;
     public DcMotor chachaslide;
+    public CRServo thatonething;
     //to be continued
 
     //constuctor
@@ -47,6 +48,7 @@ public class Robot {
         claw1 = hMap.crservo.get("claw1");
         claw2 = hMap.crservo.get("claw2");
         arm = hMap.crservo.get("arm");
+        thatonething = hMap.crservo.get("thatonething");
     }
 
     //extra functions for quality of life

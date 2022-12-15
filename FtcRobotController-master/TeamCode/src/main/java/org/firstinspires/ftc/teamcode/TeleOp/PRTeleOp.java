@@ -95,6 +95,15 @@ public class PRTeleOp extends OpMode {
         else {
             PRobot.arm.setPower(0);
         }
+        if (gamepad2.a){
+            PRobot.thatonething.setPower(1);
+        }
+        else if (gamepad2.b){
+            PRobot.thatonething.setPower(-1);
+        }
+        else {
+            PRobot.thatonething.setPower(0);
+        }
         }
     }
 
