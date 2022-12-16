@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Hardware;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -18,7 +19,11 @@ public class Robot {
 
     //Intake
     public DcMotor lift;
-    public DcMotorEx spoolControl;
+    public CRServo claw1;
+    public CRServo claw2;
+    public CRServo arm;
+    public DcMotor chachaslide;
+   // public CRServo thatonething;
     //to be continued
 
     //constuctor
@@ -39,8 +44,11 @@ public class Robot {
         bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Intake
-        lift = hMap.dcMotor.get("lift");
-        spoolControl = hMap.get(DcMotorEx.class, "spoolControl");
+        chachaslide = hMap.dcMotor.get("chachaslide");
+        claw1 = hMap.crservo.get("claw1");
+        claw2 = hMap.crservo.get("claw2");
+        arm = hMap.crservo.get("arm");
+       // thatonething = hMap.crservo.get("thatonething");
     }
 
     //extra functions for quality of life

@@ -57,11 +57,6 @@ public class PRScoreAuto extends LinearOpMode {
         liftEncoderDrive(0.5,-LVL_1_INCHES, 0.5);
         sleep(400);
 
-        PRobot.spoolControl.setPower(1);
-        sleep(200);
-
-        PRobot.spoolControl.setPower(0);
-        sleep(200);
 
         liftEncoderDrive(0.5,LVL_2_INCHES, 0.5);
         sleep(400);
