@@ -99,21 +99,21 @@ public class PRTeleOp extends OpMode {
         else {
             PRobot.arm.setPower(0);
         }
-      //  if (gamepad2.a){
-      //      PRobot.thatonething.setPower(1);
-       // telemetry.addData("Charlie Brown",gamepad2.a);
-       //     telemetry.update();
+        if (gamepad2.a){
+        PRobot.thatonething.setPower(1);
+        telemetry.addData("Charlie Brown",gamepad2.a);
+        telemetry.update();
         }
-      //  else if (gamepad2.b){
-      //      PRobot.thatonething.setPower(-1);
-       //     telemetry.addData("Hop it out now",gamepad2.b);
-        //    telemetry.update();
+      else if (gamepad2.b){
+        PRobot.thatonething.setPower(-1);
+        telemetry.addData("Hop it out now",gamepad2.b);
+        telemetry.update();
         }
-        //else {
-          //  PRobot.thatonething.setPower(0);
-       // }
-       // }
-  //  }
+        else {
+          PRobot.thatonething.setPower(0);
+       }
+        }
+   }
 
 
 
