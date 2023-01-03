@@ -42,7 +42,6 @@ public class PRVisionParkBlue extends LinearOpMode {
     Double bias = 0.8;
     Double meccyBias = 0.9;
 
-    SleeveDetection position = new SleeveDetection();
     SleeveDetection sleeveDetection;
     OpenCvCamera webcam;
 
@@ -91,7 +90,7 @@ public class PRVisionParkBlue extends LinearOpMode {
         while (opModeIsActive()) {
 
             sleep(2000);
-            telemetry.addData("Position", position.getPosition());
+            telemetry.addData("Position", sleeveDetection.getPosition());
             telemetry.update();
 
 

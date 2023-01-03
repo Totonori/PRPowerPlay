@@ -10,8 +10,8 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 public class SleeveDetection extends OpenCvPipeline {
     /*
-    Orange  = Parking Left
-    Purple    = Parking Middle
+    Orange = Parking Left
+    Cyan = Parking Middle
     Green = Parking Right
      */
 
@@ -30,8 +30,8 @@ public class SleeveDetection extends OpenCvPipeline {
 
     // Color definitions
     private final Scalar
-            Orange  = new Scalar(254, 143, 0),
-            Purple    = new Scalar(189, 104, 250),
+            Orange = new Scalar(254, 143, 0),
+            Cyan  = new Scalar(0, 255, 255),
             Green = new Scalar(170, 255, 5);
 
     // Anchor point definitions
@@ -61,7 +61,7 @@ public class SleeveDetection extends OpenCvPipeline {
                     input,
                     sleeve_pointA,
                     sleeve_pointB,
-                    Purple,
+                    Cyan,
                     2
             );
         } else if (sumColors.val[1] == minColor) {
