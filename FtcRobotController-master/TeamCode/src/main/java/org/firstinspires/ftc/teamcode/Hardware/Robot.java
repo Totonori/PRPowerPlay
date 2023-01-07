@@ -23,7 +23,7 @@ public class Robot {
     public CRServo claw2;
     public CRServo arm1;
     public DcMotor chachaslide;
-    public CRServo thatonething;
+    public CRServo coneDropper;
     public CRServo spinnyArm;
     //to be continued
 
@@ -49,7 +49,7 @@ public class Robot {
         claw1 = hMap.crservo.get("claw1");
         claw2 = hMap.crservo.get("claw2");
         arm1 = hMap.crservo.get("arm1");
-        thatonething = hMap.crservo.get("thatonething");
+        coneDropper = hMap.crservo.get("coneDropper");
         spinnyArm = hMap.crservo.get("spinnyArm");
     }
 
