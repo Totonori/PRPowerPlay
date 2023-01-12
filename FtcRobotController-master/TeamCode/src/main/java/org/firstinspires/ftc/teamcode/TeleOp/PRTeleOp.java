@@ -30,22 +30,22 @@ public class PRTeleOp extends OpMode {
 
         }
         else if (gamepad1.right_stick_x < 0 || gamepad1.right_stick_x > 0){
-            PRobot.drive(-gamepad1.right_stick_x*.7);
+            PRobot.drive(-gamepad1.right_stick_x*.5);
             telemetry.addData("Chris Cross", gamepad1.right_stick_x);
             telemetry.addLine();
             telemetry.update();
         }
         else if (gamepad1.dpad_left){
-            PRobot.fL.setPower(0.6);
-            PRobot.bL.setPower(-0.6);
+            PRobot.fL.setPower(-0.6);
+            PRobot.bL.setPower(0.6);
             PRobot.fR.setPower(0.6);
             PRobot.bR.setPower(-0.6);
             telemetry.addData("Slide to the Left",gamepad1.left_bumper);
             telemetry.update();
         }
         else if (gamepad1.dpad_right){
-            PRobot.fL.setPower(-0.6);
-            PRobot.bL.setPower(0.6);
+            PRobot.fL.setPower(0.6);
+            PRobot.bL.setPower(-0.6);
             PRobot.fR.setPower(-0.6);
             PRobot.bR.setPower(0.6);
             telemetry.addData("Slide to the Right",gamepad1.right_bumper);

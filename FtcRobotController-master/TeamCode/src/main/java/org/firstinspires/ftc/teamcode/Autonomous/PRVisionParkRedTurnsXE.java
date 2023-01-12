@@ -11,8 +11,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous (name = "Signal Sleeve Blue (NO ENCODERS)")
-public class PRVisionParkBlueXE extends LinearOpMode {
+@Autonomous (name = "Signal Sleeve Red (NO ENCODERS, TURNS)")
+public class PRVisionParkRedTurnsXE extends LinearOpMode {
 
     Robot PRobot = new Robot();
 
@@ -64,63 +64,118 @@ public class PRVisionParkBlueXE extends LinearOpMode {
 
             switch (sleeveDetection.getPosition()){
                 case LEFT:
-                    //Strafe Left
-                    PRobot.fR.setPower(0.5);
+                    //Move Backwards
+                    PRobot.fR.setPower(-0.5);
                     PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(0.5);
-                    PRobot.bL.setPower(-0.5);
-                    sleep(1100);
+                    PRobot.bL.setPower(0.5);
+                    sleep(100);
 
+                    //Turn Left
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(800);
 
                     //Move Backwards
                     PRobot.fR.setPower(-0.5);
                     PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(700);
+
+                    //Turn Right
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(-0.5);
                     PRobot.bL.setPower(-0.5);
-                    sleep(800);
+                    sleep(700);
+
+                    //Move Backwards
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(1000);
 
                     break;
 
                 case CENTER:
 
-                    //Strafe Right
+                    //Move Backwards
                     PRobot.fR.setPower(-0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(0.5);
-                    sleep(1100);
-
-                    //Move Forward
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(-0.5);
-                    sleep(1600);
-
-                    //Strafe Left
-                    PRobot.fR.setPower(0.5);
                     PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(100);
+
+                    //Turn Left
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(800);
+
+                    //Move Backwards
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(100);
+
+                    //Turn Right
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(-0.5);
                     PRobot.bL.setPower(-0.5);
-                    sleep(1100);
+                    sleep(700);
+
+                    //Move Backwards
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(1000);
 
                     break;
 
                 case RIGHT:
 
-                    //Strafe Right
+                    //Move Backwards
                     PRobot.fR.setPower(-0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
                     PRobot.bL.setPower(0.5);
-                    sleep(1100);
+                    sleep(100);
 
-                    //Move Forward
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(0.5);
+                    //Turn Right
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(-0.5);
                     PRobot.bL.setPower(-0.5);
                     sleep(800);
+
+                    //Move Backwards
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(700);
+
+                    //Turn Left
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(700);
+
+                    //Move Backwards
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(1000);
 
                     break;
             }

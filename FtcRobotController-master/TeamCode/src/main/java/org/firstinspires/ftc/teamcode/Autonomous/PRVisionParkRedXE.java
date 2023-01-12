@@ -64,11 +64,11 @@ public class PRVisionParkRedXE extends LinearOpMode {
 
             switch (sleeveDetection.getPosition()){
                 case LEFT:
-                    //Strafe Left
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(-0.5);
-                    PRobot.fL.setPower(0.5);
-                    PRobot.bL.setPower(-0.5);
+                    //Strafe Right
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(0.5);
+                    PRobot.fL.setPower(-0.5);
+                    PRobot.bL.setPower(0.5);
                     sleep(1100);
 
                     //Move Forward
@@ -105,11 +105,11 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     break;
 
                 case RIGHT:
-                    //Strafe Right
-                    PRobot.fR.setPower(-0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(0.5);
+                    //Strafe Left
+                    PRobot.fR.setPower(0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(-0.5);
                     sleep(1100);
 
                     //Move Forward
