@@ -24,7 +24,7 @@ public class Robot {
     public DcMotor arm1;
     public DcMotor chachaslide;
     public Servo coneDropper;
-    public CRServo spinnyArm;
+    public Servo spinnyArm;
     //to be continued
 
     //constuctor
@@ -50,7 +50,7 @@ public class Robot {
         claw2 = hMap.servo.get("claw2");
         arm1 = hMap.dcMotor.get("arm1");
         coneDropper = hMap.servo.get("coneDropper");
-        spinnyArm = hMap.crservo.get("spinnyArm");
+        spinnyArm = hMap.servo.get("spinnyArm");
     }
 
     //extra functions for quality of life
