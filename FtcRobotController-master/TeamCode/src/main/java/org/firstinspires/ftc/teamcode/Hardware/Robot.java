@@ -19,11 +19,11 @@ public class Robot {
 
     //Intake
     public DcMotor lift;
-    public CRServo claw1;
-    public CRServo claw2;
-    public CRServo arm1;
+    public Servo claw1;
+    public Servo claw2;
+    public DcMotor arm1;
     public DcMotor chachaslide;
-    public CRServo coneDropper;
+    public Servo coneDropper;
     public CRServo spinnyArm;
     //to be continued
 
@@ -46,10 +46,10 @@ public class Robot {
 
         //Intake
         chachaslide = hMap.dcMotor.get("chachaslide");
-        claw1 = hMap.crservo.get("claw1");
-        claw2 = hMap.crservo.get("claw2");
-        arm1 = hMap.crservo.get("arm1");
-        coneDropper = hMap.crservo.get("coneDropper");
+        claw1 = hMap.servo.get("claw1");
+        claw2 = hMap.servo.get("claw2");
+        arm1 = hMap.dcMotor.get("arm1");
+        coneDropper = hMap.servo.get("coneDropper");
         spinnyArm = hMap.crservo.get("spinnyArm");
     }
 

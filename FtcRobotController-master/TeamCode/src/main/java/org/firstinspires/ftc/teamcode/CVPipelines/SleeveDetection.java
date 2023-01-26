@@ -22,17 +22,17 @@ public class SleeveDetection extends OpenCvPipeline {
     }
 
     // TOPLEFT anchor point for the bounding box
-    private static Point SLEEVE_TOPLEFT_ANCHOR_POINT = new Point(185, 168);
+    private static Point SLEEVE_TOPLEFT_ANCHOR_POINT = new Point(155, 158);
 
     // Width and height for the bounding box
-    public static int REGION_WIDTH = -50;
-    public static int REGION_HEIGHT = -80;
+    public static int REGION_WIDTH = -10;
+    public static int REGION_HEIGHT = -60;
 
     // Color definitions
     private final Scalar
-            Orange = new Scalar(254, 143, 0),
-            Cyan  = new Scalar(0, 255, 255),
-            Green = new Scalar(170, 255, 5);
+            Orange = new Scalar(255, 131, 0),
+            Blue  = new Scalar(0, 255, 255),
+            Magenta = new Scalar(255, 37, 189);
 
     // Anchor point definitions
     Point sleeve_pointA = new Point(
@@ -55,22 +55,22 @@ public class SleeveDetection extends OpenCvPipeline {
         double minColor = Math.min(sumColors.val[0], Math.min(sumColors.val[1], sumColors.val[2]));
 
         // Change the bounding box color based on the sleeve color
-        if (sumColors.val[0] == minColor) {
+        if (sumColors.val[1] == minColor) {
             position = ParkingPosition.RIGHT;
             Imgproc.rectangle(
                     input,
                     sleeve_pointA,
                     sleeve_pointB,
-                    Cyan,
+                    Orange,
                     2
             );
-        } else if (sumColors.val[1] == minColor) {
+        } else if (sumColors.val[2] == minColor) {
             position = ParkingPosition.CENTER;
             Imgproc.rectangle(
                     input,
                     sleeve_pointA,
                     sleeve_pointB,
-                    Green,
+                    Blue,
                     2
             );
         } else {
@@ -79,7 +79,7 @@ public class SleeveDetection extends OpenCvPipeline {
                     input,
                     sleeve_pointA,
                     sleeve_pointB,
-                    Orange,
+                    Magenta,
                     2
             );
         }

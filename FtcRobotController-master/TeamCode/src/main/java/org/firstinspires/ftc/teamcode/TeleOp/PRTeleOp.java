@@ -57,12 +57,12 @@ public class PRTeleOp extends OpMode {
         }
 
         if (gamepad2.dpad_up){
-            PRobot.chachaslide.setPower(0.7);
+            PRobot.chachaslide.setPower(-0.7);
             telemetry.addData("Can you bring it to the top",gamepad2.dpad_up);
             telemetry.update();
         }
         else if (gamepad2.dpad_down){
-            PRobot.chachaslide.setPower(-0.7);
+            PRobot.chachaslide.setPower(0.7);
             telemetry.addData("How low can you go",gamepad2.dpad_down);
             telemetry.update();
         }
@@ -71,27 +71,22 @@ public class PRTeleOp extends OpMode {
 
         }
         if (gamepad2.left_bumper){
-            PRobot.claw1.setPower(1);
-            PRobot.claw2.setPower(-1);
+            PRobot.claw1.setPosition(.5);
+            PRobot.claw2.setPosition(.6);
             telemetry.addData("Left foot 2 stomp",gamepad2.left_bumper);
             telemetry.update();
         }
-        else if (gamepad2.right_bumper){
-            PRobot.claw1.setPower(1);
-            telemetry.addData("Right foot 2 stomp",gamepad2.right_bumper);
-            telemetry.update();
-        }
         else {
-            PRobot.claw2.setPower(0);
-            PRobot.claw1.setPower(0);
+            PRobot.claw1.setPosition(.9);
+            PRobot.claw2.setPosition(.1);
         }
         if (gamepad2.x){
-            PRobot.arm1.setPower(1);
+            PRobot.arm1.setPower(0.625);
             telemetry.addData("Reverse",gamepad2.x);
             telemetry.update();
         }
         else if (gamepad2.y){
-            PRobot.arm1.setPower(-1);
+            PRobot.arm1.setPower(-0.625);
             telemetry.addData("Reverse Reverse",gamepad2.y);
             telemetry.update();
         }
@@ -99,18 +94,13 @@ public class PRTeleOp extends OpMode {
             PRobot.arm1.setPower(0);
         }
         if (gamepad2.a){
-        PRobot.coneDropper.setPower(1);
+        PRobot.coneDropper.setPosition(1);
         telemetry.addData("Charlie Brown",gamepad2.a);
         telemetry.update();
         }
-      else if (gamepad2.b){
-        PRobot.coneDropper.setPower(-1);
-        telemetry.addData("Hop it out now",gamepad2.b);
-        telemetry.update();
-        }
         else {
-          PRobot.coneDropper.setPower(0);
-       }
+            PRobot.coneDropper.setPosition(0.1);
+        }
         if (gamepad2.right_trigger > .1){
             PRobot.spinnyArm.setPower(1);
         }

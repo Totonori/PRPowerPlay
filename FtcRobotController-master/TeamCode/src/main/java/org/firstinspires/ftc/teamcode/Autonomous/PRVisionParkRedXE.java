@@ -65,58 +65,58 @@ public class PRVisionParkRedXE extends LinearOpMode {
             switch (sleeveDetection.getPosition()){
                 case LEFT:
                     //Strafe Right
-                    PRobot.fR.setPower(-0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(0.5);
+                    PRobot.fR.setPower(-0.6);
+                    PRobot.bR.setPower(0.6);
+                    PRobot.fL.setPower(0.6);
+                    PRobot.bL.setPower(-0.6);
                     sleep(1100);
 
                     //Move Forward
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(-0.5);
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
                     sleep(800);
 
                     break;
 
                 case CENTER:
                     //Strafe Right
-                    PRobot.fR.setPower(-0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(0.5);
-                    sleep(1100);
+                    PRobot.fR.setPower(-0.6);
+                    PRobot.bR.setPower(0.6);
+                    PRobot.fL.setPower(0.6);
+                    PRobot.bL.setPower(-0.6);
+                    sleep(1000);
 
                     //Move Forward
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(-0.5);
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
                     sleep(1600);
 
                     //Strafe Left
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(-0.5);
-                    PRobot.fL.setPower(0.5);
-                    PRobot.bL.setPower(-0.5);
+                    PRobot.fR.setPower(0.6);
+                    PRobot.bR.setPower(-0.6);
+                    PRobot.fL.setPower(-0.6);
+                    PRobot.bL.setPower(0.6);
                     sleep(1100);
 
                     break;
 
                 case RIGHT:
                     //Strafe Left
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(-0.5);
-                    PRobot.fL.setPower(0.5);
-                    PRobot.bL.setPower(-0.5);
+                    PRobot.fR.setPower(0.6);
+                    PRobot.bR.setPower(-0.6);
+                    PRobot.fL.setPower(-0.6);
+                    PRobot.bL.setPower(0.6);
                     sleep(1100);
 
                     //Move Forward
-                    PRobot.fR.setPower(0.5);
-                    PRobot.bR.setPower(0.5);
-                    PRobot.fL.setPower(-0.5);
-                    PRobot.bL.setPower(-0.5);
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
                     sleep(800);
 
                     break;
