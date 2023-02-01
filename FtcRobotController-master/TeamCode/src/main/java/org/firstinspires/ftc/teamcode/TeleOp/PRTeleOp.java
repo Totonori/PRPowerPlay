@@ -89,10 +89,10 @@ public class PRTeleOp extends OpMode {
             telemetry.addData("Charlie Brown", gamepad2.a);
             telemetry.update();
         } else {
-            PRobot.coneDropper.setPosition(0.1);
+            PRobot.coneDropper.setPosition(0);
         }
         if (gamepad2.right_trigger > .1) {
-            PRobot.spinnyArm.setPosition(0.125);
+            PRobot.spinnyArm.setPosition(0.075);
         } else {
             PRobot.spinnyArm.setPosition(0.475);
         }
