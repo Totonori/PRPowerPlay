@@ -69,14 +69,14 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     PRobot.bR.setPower(0.6);
                     PRobot.fL.setPower(0.6);
                     PRobot.bL.setPower(-0.6);
-                    sleep(1100);
+                    sleep(1050);
 
                     //Move Forward
                     PRobot.fR.setPower(-0.5);
                     PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(0.5);
                     PRobot.bL.setPower(0.5);
-                    sleep(800);
+                    sleep(1000);
 
                     break;
 
@@ -86,21 +86,28 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     PRobot.bR.setPower(0.6);
                     PRobot.fL.setPower(0.6);
                     PRobot.bL.setPower(-0.6);
-                    sleep(1000);
+                    sleep(1050);
 
                     //Move Forward
                     PRobot.fR.setPower(-0.5);
                     PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(0.5);
                     PRobot.bL.setPower(0.5);
-                    sleep(1600);
+                    sleep(800);
 
                     //Strafe Left
                     PRobot.fR.setPower(0.6);
                     PRobot.bR.setPower(-0.6);
                     PRobot.fL.setPower(-0.6);
                     PRobot.bL.setPower(0.6);
-                    sleep(1100);
+                    sleep(1050);
+
+                    //Move Backwards
+                    PRobot.fR.setPower(-0.5);
+                    PRobot.bR.setPower(-0.5);
+                    PRobot.fL.setPower(0.5);
+                    PRobot.bL.setPower(0.5);
+                    sleep(300);
 
                     break;
 
@@ -110,14 +117,14 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     PRobot.bR.setPower(-0.6);
                     PRobot.fL.setPower(-0.6);
                     PRobot.bL.setPower(0.6);
-                    sleep(1100);
+                    sleep(1050);
 
                     //Move Forward
                     PRobot.fR.setPower(-0.5);
                     PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(0.5);
                     PRobot.bL.setPower(0.5);
-                    sleep(800);
+                    sleep(1000);
 
                     break;
             }
