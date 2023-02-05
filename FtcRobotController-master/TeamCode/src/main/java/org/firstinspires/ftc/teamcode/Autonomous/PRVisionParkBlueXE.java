@@ -88,7 +88,7 @@ public class PRVisionParkBlueXE extends LinearOpMode {
                     PRobot.bR.setPower(-0.6);
                     PRobot.fL.setPower(-0.6);
                     PRobot.bL.setPower(0.6);
-                    sleep(1050);
+                    sleep(1000);
 
                     //Move Forward
                     PRobot.fR.setPower(-0.5);
@@ -102,7 +102,7 @@ public class PRVisionParkBlueXE extends LinearOpMode {
                     PRobot.bR.setPower(0.6);
                     PRobot.fL.setPower(0.6);
                     PRobot.bL.setPower(-0.6);
-                    sleep(1050);
+                    sleep(1025);
 
                     //Move Backwards
                     PRobot.fR.setPower(-0.5);

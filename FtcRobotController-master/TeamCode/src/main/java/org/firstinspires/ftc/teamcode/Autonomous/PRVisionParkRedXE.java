@@ -124,7 +124,7 @@ public class PRVisionParkRedXE extends LinearOpMode {
                     PRobot.bR.setPower(-0.5);
                     PRobot.fL.setPower(0.5);
                     PRobot.bL.setPower(0.5);
-                    sleep(1000);
+                    sleep(1050);
 
                     break;
             }
